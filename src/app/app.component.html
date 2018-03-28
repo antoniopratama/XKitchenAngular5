@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>Welcome to {{ title }}!</h1>
+<!-- <h1>Welcome to {{ title }}!</h1>
 <br>
 <table>
   <thead>
@@ -22,7 +22,7 @@
 <br>
 <app-tables></app-tables>
 <br>
-<app-users></app-users>
+<app-users></app-users> -->
 <!-- <div style="text-align:center">
   <h1>
   </h1>
@@ -40,4 +40,61 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul> -->
+
+<div class="container theme-showcase" role="main">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">
+          <img src="favicon.ico" class="logo">
+        </a>
+        <span class="navbar-brand">Xsis Kitchen</span>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink="">Home</a>
+        </li>
+        <li>
+          <a routerLink="/categories">Categories</a>
+        </li>
+        <li>
+          <a routerLink="/users">Users</a>
+        </li>
+        <li>
+          <a routerLink="/tables">Tables</a>
+        </li>
+        <li class="dropdown" dropdown>
+          <!-- {1} -->
+          <a dropdownToggle role="button">
+            <!-- {2} -->
+            Dropdown
+            <span class="caret"></span>
+          </a>
+          <ul *dropdownMenu class="dropdown-menu">
+            <!-- {3} -->
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">One more separated link</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+
 

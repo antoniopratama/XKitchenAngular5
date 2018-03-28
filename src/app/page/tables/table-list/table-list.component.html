@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>No. </th>
+      <th>Code</th>
+      <th>Seat</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let table of tables; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{table.code}}</td>
+      <td>{{table.seat}}</td>
+      <td>{{table.description}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Xsis Kitchen App';
-  peoples = [
-    {id: 1, name: 'Budi Gunawan', age: 18},
-    {id: 2, name: 'Andi Tjandra', age: 22},
-    {id: 3, name: 'William Sugito', age: 21},
-    {id: 4, name: 'Wati Ningsih', age: 19},
-    {id: 5, name: 'Rudi', age: 22},
-  ];
 }
