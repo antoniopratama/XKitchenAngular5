@@ -1,33 +1,30 @@
-<div class="panel.panel-primary">
-  <div class="panel-heading">
-    <h3>Add New</h3>
-  </div>
-  <div class="panel-body">
-    <table>
-      <tr>
-        <td>
-          <label class="col-md-4">Code</label>
-        </td>
-        <td>
-          <input #newCode />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Seat</label>
-        </td>
-        <td>
-          <input #newSeat />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Description</label>
-        </td>
-        <td>
-          <input #newDescription />
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
+<form class="cat-form" #tableForm="ngForm" (ngSubmit)="onSubmit(tableForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="tableService.selectedTable._id">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="code">Code</label>
+        <input class="form-control" name="code" #code="ngModel" [(ngModel)]="tableService.selectedTable.code">
+      </div>
+    </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="seat">Seat</label>
+          <input class="form-control" name="seat" #seat="ngModel" [(ngModel)]="tableService.selectedTable.seat">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="description">Description</label>
+          <input class="form-control" name="description" #description="ngModel" [(ngModel)]="tableService.selectedTable.description">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <button type="submit" class = "btn btn-lg btn-block btn-info">Submit</button>
+        </div>
+        <div class="form-group col-md-6">
+          <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(tableForm)">Reset</button>
+        </div>
+  
+      </div>
+  </form>

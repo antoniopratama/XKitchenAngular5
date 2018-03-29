@@ -5,14 +5,19 @@
       <th>Code</th>
       <th>Initial</th>
       <th>Name</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of categories; let i = index">
+    <tr *ngFor="let category of categoryService.categoryList; let i = index">
       <td>{{i + 1}}</td>
       <td>{{category.code}}</td>
       <td>{{category.initial}}</td>
       <td>{{category.name}}</td>
+      <td>
+        <input type="button" class="btn btn-warning" value="Edit" (click)="onEdit(category._id)">
+        <input type="button" class="btn btn-danger" value="Delete" (click)="onDelete(category._id)">
+      </td>
     </tr>
   </tbody>
 </table>

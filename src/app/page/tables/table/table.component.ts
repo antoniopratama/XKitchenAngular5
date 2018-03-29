@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
+import { TableService } from '../../../services/table.service';
 
 @Component({
   selector: 'app-table',
@@ -8,15 +9,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class TableComponent implements OnInit {
   angForm : FormGroup;  
-  constructor(private fb: FormBuilder) { }
+  constructor(private tableService: TableService) { }
 
   ngOnInit() {
+    this.resetForm();
   }
-  createForm(){
-    this.angForm = this.fb.group({
-      code: ['', Validators.required],
-      seat: ['', Validators.required],
-      description: ['', Validators.required]
-    });
+  resetForm(form?: NgForm){
+    if (form != null){
+      form.reset();
+    }
+    this.tableService.selectedTable = {
+      _id : null,
+      code : '',
+      seat : 0,
+      description : ''
+    }
+  }
+  onSubmit(form: NgForm){
+    if(form.value._id == null){
+      this.tableService.postTable(form.value)
+        .subscribe(data => {
+          this.tableService.getTables();
+          this.resetForm(form);
+        });
+    } else {
+      this.tableService.patchTable(form.value._id, form.value)
+          .subscribe(data => {
+            this.tableService.getTables();
+            this.resetForm(form);
+          });
+    }
   }
 }

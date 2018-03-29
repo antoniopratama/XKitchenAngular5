@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -8,17 +9,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class UserComponent implements OnInit {
   angForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.resetForm();
   }
-  createForm(){
-    this.angForm = this.fb.group({
-      userId: ['', Validators.required],
-      password: ['', Validators.required],
-      badgeId: ['', Validators.required],
-      nick: ['', Validators.required],
-      fullName: ['', Validators.required]
-    });
+  resetForm(form?: NgForm){
+    if (form != null){
+      form.reset();
+    }
+    this.userService.selectedUser = {
+      _id : null,
+      userId : '',
+      password : '',
+      badgeId : '',
+      nick : '',
+      fullName: ''
+    }
+  }
+  onSubmit(form: NgForm){
+    if(form.value._id == null){
+      this.userService.postUser(form.value)
+        .subscribe(data => {
+          this.userService.getUsers();
+          this.resetForm(form);
+        });
+    } else {
+      this.userService.patchUser(form.value._id, form.value)
+          .subscribe(data => {
+            this.userService.getUsers();
+            this.resetForm(form);
+          });
+    }
   }
 }

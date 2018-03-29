@@ -7,16 +7,21 @@
       <th>Badge Id</th>
       <th>Nickname</th>
       <th>Fullname</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index">
+    <tr *ngFor="let user of userService.userList; let i = index">
       <td>{{i + 1}}</td>
       <td>{{user.userId}}</td>
       <td>{{user.password}}</td>
       <td>{{user.badgeId}}</td>
       <td>{{user.nick}}</td>
       <td>{{user.fullName}}</td>
+      <td>
+        <input type="button" class="btn btn-warning" value="Edit" (click)="onEdit(user._id)">
+        <input type="button" class="btn btn-danger" value="Delete" (click)="onDelete(user._id)">
+      </td>
     </tr>
   </tbody>
 </table>

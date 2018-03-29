@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -8,15 +9,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class CategoryComponent implements OnInit {
   angForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.resetForm();
   }
-  createForm(){
-    this.angForm = this.fb.group({
-      code: ['', Validators.required],
-      initial: ['', Validators.required],
-      name: ['', Validators.required],
-    });
+  resetForm(form?: NgForm){
+    if (form != null){
+      form.reset();
+    }
+    this.categoryService.selectedCategory = {
+      _id : null,
+      code : '',
+      initial : '',
+      name : ''
+    }
+  }
+  onSubmit(form: NgForm){
+    if(form.value._id == null){
+      this.categoryService.postCategory(form.value)
+        .subscribe(data => {
+          this.categoryService.getCategories();
+          this.resetForm(form);
+        });
+    } else {
+      this.categoryService.patchCategory(form.value._id, form.value)
+          .subscribe(data => {
+            this.categoryService.getCategories();
+            this.resetForm(form);
+          });
+    }
   }
 }

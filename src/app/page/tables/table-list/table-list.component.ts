@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from '../../../services/table.service';
+import { Table } from '../../../models/table.model';
 
 @Component({
   selector: 'app-table-list',
@@ -8,12 +9,20 @@ import { TableService } from '../../../services/table.service';
 })
 export class TableListComponent implements OnInit {
 
-  tables = [];
-  constructor(private _tableService: TableService) { }
+  constructor(private tableService: TableService) { }
 
   ngOnInit() {
-    this._tableService.getTables()
-        .subscribe(data => this.tables = data)
+    this.tableService.getTables();
   }
-
+  onEdit(_id: String){
+    this.tableService.getTable(_id);
+  }
+  onDelete(_id: String){
+    if(confirm('Are you sure to delete this record?') === true){
+      this.tableService.deleteTable(_id)
+          .subscribe(x => {
+            this.tableService.getTables();
+          })
+    }
+  }
 }

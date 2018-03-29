@@ -1,49 +1,41 @@
-<div class="panel.panel-primary">
-  <div class="panel-heading">
-    <h3>Add New</h3>
-  </div>
-  <div class="panel-body">
-    <table>
-      <tr>
-        <td>
-          <label class="col-md-4">User Id</label>
-        </td>
-        <td>
-          <input #newUserId />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Password</label>
-        </td>
-        <td>
-          <input #newPassword />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Badge Id</label>
-        </td>
-        <td>
-          <input #newBadgeId />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Nickname</label>
-        </td>
-        <td>
-          <input #newNick />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label class="col-md-4">Fullname</label>
-        </td>
-        <td>
-          <input #newFullName />
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
+<form class="cat-form" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="userId">User Id</label>
+        <input class="form-control" name="userId" #userId="ngModel" [(ngModel)]="userService.selectedUser.userId">
+      </div>
+    </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="password">Password</label>
+          <input class="form-control" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="badgeId">Badge Id</label>
+          <input class="form-control" name="badgeId" #badgeId="ngModel" [(ngModel)]="userService.selectedUser.badgeId">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="nick">Nickname</label>
+          <input class="form-control" name="nick" #nick="ngModel" [(ngModel)]="userService.selectedUser.nick">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="fullName">Fullname</label>
+          <input class="form-control" name="fullName" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <button type="submit" class = "btn btn-lg btn-block btn-info">Submit</button>
+        </div>
+        <div class="form-group col-md-6">
+          <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(userForm)">Reset</button>
+        </div>
+      </div>
+  </form>
