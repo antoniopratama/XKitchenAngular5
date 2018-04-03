@@ -1,3 +1,83 @@
 <h3>User</h3>
-<app-user></app-user>
-<app-user-list></app-user-list>
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Create New</button><br><br>
+<ng-template #template>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">User</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <form class="cat-form" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="userId">User Id</label>
+              <input class="form-control" name="userId" #userId="ngModel" [(ngModel)]="userService.selectedUser.userId">
+            </div>
+          </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="password">Password</label>
+                <input class="form-control" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="badgeId">Badge Id</label>
+                <input class="form-control" name="badgeId" #badgeId="ngModel" [(ngModel)]="userService.selectedUser.badgeId">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="nick">Nickname</label>
+                <input class="form-control" name="nick" #nick="ngModel" [(ngModel)]="userService.selectedUser.nick">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="fullName">Fullname</label>
+                <input class="form-control" name="fullName" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <button type="submit" class = "btn btn-lg btn-block btn-info">Submit</button>
+              </div>
+              <div *ngIf="isNew" class="form-group col-md-4">
+                <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(userForm)">Reset</button>
+              </div>
+              <div class="form-group col-md-4">
+                  <button type="button" class="btn btn-lg btn-block btn-warning" (click)="this.modalRef.hide()">Cancel</button>
+                </div>
+            </div>
+        </form>
+  </div>
+</ng-template>
+<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>No. </th>
+            <th>User Id</th>
+            <th>Password</th>
+            <th>Badge Id</th>
+            <th>Nickname</th>
+            <th>Fullname</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userService.userList; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{user.userId}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.badgeId}}</td>
+            <td>{{user.nick}}</td>
+            <td>{{user.fullName}}</td>
+            <td>
+              <input type="button" class="btn btn-warning" value="Edit" (click)="onEdit(template,user._id)">
+              <input type="button" class="btn btn-danger" value="Delete" (click)="onDelete(user._id)">
+            </td>
+          </tr>
+        </tbody>
+      </table>

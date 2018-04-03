@@ -32,15 +32,9 @@ export class CategoryService {
     return this.http.post(this._url, body, requestOptions).map(x => x.json());
   }
   patchCategory(_id, category: Category){
-    const body = [
-      {'propName': 'code', 'value': category.code},
-      {'propName': 'initial', 'value': category.initial},
-      {'propName': 'name', 'value': category.name},
-
-    ];
     const headerOptions = new Headers({'Content-Type': 'application/json'});
     const requestOptions = new RequestOptions({method: RequestMethod.Patch, headers: headerOptions});
-    return this.http.patch(this._url + '/' + _id, body, requestOptions).map(x => x.json());
+    return this.http.patch(this._url + '/' + _id, category, requestOptions).map(x => x.json());
   }
   deleteCategory(_id){
     return this.http.delete(this._url + '/' + _id).map(x => x.json());

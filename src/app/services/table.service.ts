@@ -30,14 +30,9 @@ export class TableService {
     return this.http.post(this._url, body, requestOptions).map(x => x.json());
   } 
   patchTable(_id, table: Table){
-    const body = [
-      {'propName': 'code', 'value': table.code},
-      {'propName': 'seat', 'value': table.seat},
-      {'propName': 'description', 'value': table.description},
-    ];
     const headerOptions = new Headers({'Content-Type': 'application/json'});
     const requestOptions = new RequestOptions({method: RequestMethod.Patch, headers: headerOptions});
-    return this.http.patch(this._url + '/' + _id, body, requestOptions).map(x => x.json());
+    return this.http.patch(this._url + '/' + _id, table, requestOptions).map(x => x.json());
   }
   deleteTable(_id){
     return this.http.delete(this._url + '/' + _id).map(x => x.json());

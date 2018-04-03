@@ -30,16 +30,9 @@ export class UserService {
     return this.http.post(this._url, body, requestOptions).map(x => x.json());
   }
   patchUser(_id, user: User){
-    const body = [
-      {'propName': 'userId', 'value': user.userId},
-      {'propName': 'password', 'value': user.password},
-      {'propName': 'badgeId', 'value': user.badgeId},
-      {'propName': 'nick', 'value': user.nick},
-      {'propName': 'fullName', 'value': user.fullName},
-    ];
     const headerOptions = new Headers({'Content-Type': 'application/json'});
     const requestOptions = new RequestOptions({method: RequestMethod.Post, headers: headerOptions});
-    return this.http.patch(this._url + '/' + _id , body, requestOptions).map(x => x.json());
+    return this.http.patch(this._url + '/' + _id , user, requestOptions).map(x => x.json());
   }
   deleteUser(_id){
     return this.http.delete(this._url + '/' + _id).map(x => x.json());
